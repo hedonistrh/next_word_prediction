@@ -1,0 +1,1135 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{prediction}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Deep Learning Approach}\label{deep-learning-approach}
+
+In this challenge, I started to use some idea from text generation to
+train my system. Because, text generation is based on previous elements
+and it generates the most probable next word. (Actually, it is depend on
+the \emph{Temperature} value, however, if you set this value like 0.4,
+it generate mostly most probable one.)
+
+There are different implementations for text generation, however, most
+of them is based on char-rnn. So that, we can not use these versions for
+word level based prediction. If we can use char based generation,
+\href{https://github.com/minimaxir/textgenrnn}{this implemantation} will
+be one of the best option. Because, it is well optimized for memory
+usage and speed.
+
+\emph{One last thing that textgenrnn can do that most char-rnn
+implementations can't is generate a word level model (thanks to Keras's
+tokenizers), where the model uses the n previous words/punctuation to
+predict the next word/punctuation.}
+\href{https://minimaxir.com/2018/05/text-neural-networks/}{Source}
+
+So that, I will choose
+\href{https://medium.com/@david.campion/text-generation-using-bidirectional-lstm-and-doc2vec-models-1-3-8979eb65cb3a}{this
+blogpost} as my intuition. I will change and tweak the methods according
+to my own need.
+
+    \textbf{DATASET}
+
+I have tried \href{http://u.cs.biu.ac.il/~koppel/BlogCorpus.htm}{the
+blog authorship corpus.} This corpus includes .xml files for blogpost. I
+thought that it can represent real human conservation.
+
+Firstly, I need to convert to .txt files. Also, when I check the
+dataset, I realize that, if the writer is younger than 21, it contains
+too much slang and typo. So that, I will use blogpost whose writers are
+older than 21.
+
+For xml manipulation, BeatifulSoup is one of the best option.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{bs4} \PY{k}{import} \PY{n}{BeautifulSoup}
+        \PY{k+kn}{import} \PY{n+nn}{glob}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+        
+        \PY{n}{xml\PYZus{}root\PYZus{}dir} \PY{o}{=} \PY{n}{glob}\PY{o}{.}\PY{n}{glob}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./blogs/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*xml}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{xml\PYZus{}file} \PY{o+ow}{in} \PY{n}{xml\PYZus{}root\PYZus{}dir}\PY{p}{:}
+            
+            \PY{k}{if} \PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{p}{(}\PY{n}{xml\PYZus{}file}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{21}\PY{p}{)}\PY{p}{:}
+            
+                \PY{k}{try}\PY{p}{:}
+                    \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{xml\PYZus{}file}\PY{p}{)} \PY{k}{as} \PY{n}{fp}\PY{p}{:}
+                        \PY{n}{soup} \PY{o}{=} \PY{n}{BeautifulSoup}\PY{p}{(}\PY{n}{fp}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lxml}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+                        \PY{n}{text\PYZus{}file} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./blogs\PYZus{}txt/}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{p}{(}\PY{n}{xml\PYZus{}file}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.txt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                        \PY{n}{posts} \PY{o}{=} \PY{n}{soup}\PY{o}{.}\PY{n}{findAll}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{post}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                        \PY{k}{for} \PY{n}{single\PYZus{}post} \PY{o+ow}{in} \PY{n}{posts}\PY{p}{:}
+                            \PY{n}{text\PYZus{}file}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{single\PYZus{}post}\PY{o}{.}\PY{n}{text}\PY{p}{)}
+        
+                        \PY{n}{text\PYZus{}file}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+                \PY{k}{except} \PY{n+ne}{UnicodeDecodeError}\PY{p}{:}
+                    \PY{k}{pass}
+                
+\end{Verbatim}
+
+
+    When I train the LSTM system with this dataset, results are not
+satisfied. It mostly generates same words. I use simple LSTM model.
+Maybe, if we can clear more and train with more deep architecture, we
+can get good results.
+
+\emph{Ps. I have trained it for 30 minutes. I don't supply the training
+result. Because I want to keep clear this notebook}
+
+    Also, I have tried
+\href{http://www.cs.cornell.edu/~cristian/Cornell_Movie-Dialogs_Corpus.html}{Cornell
+Movie Dialog Corpus.} We need to preprocess this txt file.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./cornell\PYZus{}movie\PYZus{}quotes\PYZus{}corpus/moviequotes.scripts.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+            \PY{n}{content} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+        \PY{n}{content} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{content}\PY{p}{]}     
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cornell\PYZus{}clean.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+            \PY{n}{counter} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{single\PYZus{}content} \PY{o+ow}{in} \PY{n}{content}\PY{p}{:}
+                \PY{n}{single\PYZus{}sentence} \PY{o}{=} \PY{p}{(}\PY{n}{single\PYZus{}content}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{+++\PYZdl{}+++}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                \PY{n}{f}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{single\PYZus{}sentence}\PY{p}{)}
+                \PY{n}{counter} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                \PY{k}{if} \PY{p}{(}\PY{n}{counter} \PY{o}{==} \PY{l+m+mi}{5000}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} How many file will be taken}
+                    \PY{k}{break}
+        
+        \PY{n}{f}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{from} \PY{n+nn}{\PYZus{}\PYZus{}future\PYZus{}\PYZus{}} \PY{k}{import} \PY{n}{print\PYZus{}function}
+        \PY{c+c1}{\PYZsh{}import Keras library}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Sequential}\PY{p}{,} \PY{n}{Model}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Dense}\PY{p}{,} \PY{n}{Activation}\PY{p}{,} \PY{n}{Dropout}\PY{p}{,} \PY{n}{GRU}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{LSTM}\PY{p}{,} \PY{n}{Input}\PY{p}{,} \PY{n}{Bidirectional}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{optimizers} \PY{k}{import} \PY{n}{Adam}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{callbacks} \PY{k}{import} \PY{n}{EarlyStopping}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{callbacks} \PY{k}{import} \PY{n}{ModelCheckpoint}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{categorical\PYZus{}accuracy}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers}\PY{n+nn}{.}\PY{n+nn}{embeddings} \PY{k}{import} \PY{n}{Embedding}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers}\PY{n+nn}{.}\PY{n+nn}{recurrent} \PY{k}{import} \PY{n}{SimpleRNN}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers}\PY{n+nn}{.}\PY{n+nn}{wrappers} \PY{k}{import} \PY{n}{TimeDistributed}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Convolution1D}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{load\PYZus{}model}
+        
+        \PY{c+c1}{\PYZsh{}import spacy, and spacy french model}
+        \PY{c+c1}{\PYZsh{} spacy is used to work on text}
+        \PY{k+kn}{import} \PY{n+nn}{spacy}
+        \PY{n}{nlp} \PY{o}{=} \PY{n}{spacy}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{en}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}import other libraries}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{k+kn}{import} \PY{n+nn}{sys}
+        \PY{k+kn}{import} \PY{n+nn}{glob}
+        \PY{k+kn}{import} \PY{n+nn}{re}
+        \PY{k+kn}{import} \PY{n+nn}{os}
+        \PY{k+kn}{import} \PY{n+nn}{time}
+        \PY{k+kn}{import} \PY{n+nn}{codecs}
+        \PY{k+kn}{import} \PY{n+nn}{collections}
+        \PY{k+kn}{from} \PY{n+nn}{six}\PY{n+nn}{.}\PY{n+nn}{moves} \PY{k}{import} \PY{n}{cPickle}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/herdogan/anaconda3/envs/pyannote/lib/python3.6/site-packages/h5py/\_\_init\_\_.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from .\_conv import register\_converters as \_register\_converters
+Using TensorFlow backend.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{save\PYZus{}dir} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{save}\PY{l+s+s1}{\PYZsq{}} \PY{c+c1}{\PYZsh{} To store trained DL model}
+        \PY{n}{file\PYZus{}list} \PY{o}{=} \PY{n}{glob}\PY{o}{.}\PY{n}{glob}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cornell\PYZus{}clean.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{vocab\PYZus{}file} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{save\PYZus{}dir}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{words\PYZus{}vocab.pkl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{sequences\PYZus{}step} \PY{o}{=} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} Step to create sequences}
+\end{Verbatim}
+
+
+    I will use \href{https://spacy.io}{Spacy} to tokenize my dataset. If we
+use \emph{Keras} tokenizer, we can not work on word-level creation or
+prediction.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{create\PYZus{}wordlist}\PY{p}{(}\PY{n}{doc}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Append all words in one .txt files into one list.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Arguments:}
+        \PY{l+s+sd}{    doc: The document\PYZsq{}s directory\PYZdq{}\PYZdq{}\PYZdq{}}
+            
+            \PY{n}{wl} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{doc}\PY{p}{:}
+                \PY{k}{if} \PY{n}{word}\PY{o}{.}\PY{n}{text} \PY{o+ow}{not} \PY{o+ow}{in} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}u2009}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}xa0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{urlLink}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{wl}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{word}\PY{o}{.}\PY{n}{text}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{wl}
+\end{Verbatim}
+
+
+    Now, we can create a list which inclued all words in our dataset.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{wordlist} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{k}{for} \PY{n}{input\PYZus{}file} \PY{o+ow}{in} \PY{n}{file\PYZus{}list}\PY{p}{:}
+            
+            \PY{c+c1}{\PYZsh{} Read data}
+            \PY{k}{with} \PY{n}{codecs}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{n}{input\PYZus{}file}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+                \PY{n}{data} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+                
+            \PY{n}{pattern} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[\PYZca{}a\PYZhy{}zA\PYZhy{}Z}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{s]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{data\PYZus{}revise} \PY{o}{=} \PY{n}{pattern}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{p}{)}
+                
+            \PY{c+c1}{\PYZsh{} Create sentences with spacy tokenizer.}
+            \PY{n}{doc} \PY{o}{=} \PY{n}{nlp}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+            \PY{n}{wl} \PY{o}{=} \PY{n}{create\PYZus{}wordlist}\PY{p}{(}\PY{n}{doc}\PY{p}{)}
+            \PY{n}{wordlist} \PY{o}{=} \PY{n}{wordlist} \PY{o}{+} \PY{n}{wl}
+\end{Verbatim}
+
+
+    We need to create a dictionary, each specific word has own specific
+index.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Count the number of words}
+        \PY{n}{word\PYZus{}counts} \PY{o}{=} \PY{n}{collections}\PY{o}{.}\PY{n}{Counter}\PY{p}{(}\PY{n}{wordlist}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Mapping from index to word : that\PYZsq{}s the vocabulary}
+        \PY{n}{vocabulary\PYZus{}inv} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{word\PYZus{}counts}\PY{o}{.}\PY{n}{most\PYZus{}common}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+        \PY{n}{vocabulary\PYZus{}inv} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{sorted}\PY{p}{(}\PY{n}{vocabulary\PYZus{}inv}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Mapping from word to index}
+        \PY{n}{vocab} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{x}\PY{p}{:} \PY{n}{i} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{vocabulary\PYZus{}inv}\PY{p}{)}\PY{p}{\PYZcb{}}
+        \PY{n}{words} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{word\PYZus{}counts}\PY{o}{.}\PY{n}{most\PYZus{}common}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Size of vocabulary}
+        \PY{n}{vocab\PYZus{}size} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{words}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vocab size: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{vocab\PYZus{}size}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Save the words and vocabulary as a pickle file}
+        \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{vocab\PYZus{}file}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+            \PY{n}{cPickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{p}{(}\PY{n}{words}\PY{p}{,} \PY{n}{vocab}\PY{p}{,} \PY{n}{vocabulary\PYZus{}inv}\PY{p}{)}\PY{p}{,} \PY{n}{f}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+vocab size:  6050
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}We need to create two different list. One list include the previous words, another list inclued the next word.\PYZdq{}\PYZdq{}\PYZdq{}}
+        
+        \PY{n}{seq\PYZus{}length} \PY{o}{=} \PY{l+m+mi}{15}
+        
+        \PY{n}{sequences} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{next\PYZus{}words} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{wordlist}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{seq\PYZus{}length}\PY{p}{,} \PY{n}{sequences\PYZus{}step}\PY{p}{)}\PY{p}{:}
+            \PY{n}{sequences}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{wordlist}\PY{p}{[}\PY{n}{i}\PY{p}{:} \PY{n}{i} \PY{o}{+} \PY{n}{seq\PYZus{}length}\PY{p}{]}\PY{p}{)}
+            \PY{n}{next\PYZus{}words}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{wordlist}\PY{p}{[}\PY{n}{i} \PY{o}{+} \PY{n}{seq\PYZus{}length}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nb sequences:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{sequences}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+nb sequences: 68710
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}This gif can give a idea to how system predict the next word. This gif was created for my music generation project.\PYZdq{}\PYZdq{}\PYZdq{}}
+        
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{HTML}
+        \PY{n}{HTML}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZlt{}img src=}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{https://s1.gifyu.com/images/try\PYZhy{}2018\PYZhy{}04\PYZhy{}15\PYZhy{}03.42.07.gif}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZgt{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}We can not use this type of array directly. So that, we have to modify this data to use with LSTM. We need }
+         \PY{l+s+sd}{to convert into one\PYZhy{}hot vector type array. }
+         
+         \PY{l+s+sd}{List which includes previous words should have a dimension as number of sequences, number of words in sequences,}
+         \PY{l+s+sd}{number of words in vocabulary. The other list should have a dimension as number of sequences, }
+         \PY{l+s+sd}{number of words in vocabulary.\PYZdq{}\PYZdq{}\PYZdq{}}
+         
+         \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sequences}\PY{p}{)}\PY{p}{,} \PY{n}{seq\PYZus{}length}\PY{p}{,} \PY{n}{vocab\PYZus{}size}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{bool}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sequences}\PY{p}{)}\PY{p}{,} \PY{n}{vocab\PYZus{}size}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{bool}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{sentence} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{sequences}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{t}\PY{p}{,} \PY{n}{word} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{sentence}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{vocab}\PY{p}{[}\PY{n}{word}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{vocab}\PY{p}{[}\PY{n}{next\PYZus{}words}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{bidirectional\PYZus{}lstm\PYZus{}model}\PY{p}{(}\PY{n}{seq\PYZus{}length}\PY{p}{,} \PY{n}{vocab\PYZus{}size}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Build LSTM model.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{model} \PY{o}{=} \PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Bidirectional}\PY{p}{(}\PY{n}{LSTM}\PY{p}{(}\PY{n}{rnn\PYZus{}size}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{relu}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{return\PYZus{}sequences}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} 
+                                          \PY{n}{kernel\PYZus{}initializer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{random\PYZus{}normal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                             \PY{n}{bias\PYZus{}initializer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{random\PYZus{}normal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                                     \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{p}{(}\PY{n}{seq\PYZus{}length}\PY{p}{,} \PY{n}{vocab\PYZus{}size}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dropout}\PY{p}{(}\PY{l+m+mf}{0.3}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Bidirectional}\PY{p}{(}\PY{n}{LSTM}\PY{p}{(}\PY{n}{rnn\PYZus{}size}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{relu}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                         \PY{n}{kernel\PYZus{}initializer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{random\PYZus{}normal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                             \PY{n}{bias\PYZus{}initializer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{random\PYZus{}normal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dropout}\PY{p}{(}\PY{l+m+mf}{0.3}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Dense}\PY{p}{(}\PY{n}{vocab\PYZus{}size}\PY{p}{)}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{Activation}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{optimizer} \PY{o}{=} \PY{n}{Adam}\PY{p}{(}\PY{n}{lr}\PY{o}{=}\PY{n}{learning\PYZus{}rate}\PY{p}{)}
+             \PY{n}{callbacks}\PY{o}{=}\PY{p}{[}\PY{n}{EarlyStopping}\PY{p}{(}\PY{n}{patience}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{monitor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{val\PYZus{}loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}
+             \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{optimizer}\PY{o}{=}\PY{n}{optimizer}\PY{p}{,} \PY{n}{metrics}\PY{o}{=}\PY{p}{[}\PY{n}{categorical\PYZus{}accuracy}\PY{p}{]}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{model built!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{return} \PY{n}{model}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{rnn\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{32} \PY{c+c1}{\PYZsh{} size of RNN}
+         \PY{n}{learning\PYZus{}rate} \PY{o}{=} \PY{l+m+mf}{0.001} 
+         
+         \PY{n}{md} \PY{o}{=} \PY{n}{bidirectional\PYZus{}lstm\PYZus{}model}\PY{p}{(}\PY{n}{seq\PYZus{}length}\PY{p}{,} \PY{n}{vocab\PYZus{}size}\PY{p}{)}
+         \PY{n}{md}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Build LSTM model.
+model built!
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                 Output Shape              Param \#   
+=================================================================
+bidirectional\_1 (Bidirection (None, 15, 64)            1557248   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dropout\_1 (Dropout)          (None, 15, 64)            0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+bidirectional\_2 (Bidirection (None, 64)                24832     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dropout\_2 (Dropout)          (None, 64)                0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dense\_1 (Dense)              (None, 6050)              393250    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+activation\_1 (Activation)    (None, 6050)              0         
+=================================================================
+Total params: 1,975,330
+Trainable params: 1,975,330
+Non-trainable params: 0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{32} \PY{c+c1}{\PYZsh{} minibatch size}
+         \PY{n}{num\PYZus{}epochs} \PY{o}{=} \PY{l+m+mi}{2} \PY{c+c1}{\PYZsh{} number of epochs}
+         
+         \PY{n}{callbacks}\PY{o}{=}\PY{p}{[}\PY{n}{EarlyStopping}\PY{p}{(}\PY{n}{patience}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{monitor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{val\PYZus{}loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,}
+                    \PY{n}{ModelCheckpoint}\PY{p}{(}\PY{n}{filepath}\PY{o}{=}\PY{n}{save\PYZus{}dir} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{my\PYZus{}model\PYZus{}gen\PYZus{}sentences.}\PY{l+s+si}{\PYZob{}epoch:02d\PYZcb{}}\PY{l+s+s1}{\PYZhy{}}\PY{l+s+si}{\PYZob{}val\PYZus{}loss:.2f\PYZcb{}}\PY{l+s+s1}{.hdf5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PYZbs{}
+                                    \PY{n}{monitor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{val\PYZus{}loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{auto}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{period}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{]}
+         
+         \PY{n}{history} \PY{o}{=} \PY{n}{md}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,}
+                          \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}\PY{p}{,}
+                          \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                          \PY{n}{epochs}\PY{o}{=}\PY{n}{num\PYZus{}epochs}\PY{p}{,}
+                          \PY{n}{callbacks}\PY{o}{=}\PY{n}{callbacks}\PY{p}{,}
+                          \PY{n}{validation\PYZus{}split}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{)}
+         
+         \PY{n}{md}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{save\PYZus{}dir} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{my\PYZus{}model\PYZus{}generate\PYZus{}sentences.h5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train on 61839 samples, validate on 6871 samples
+Epoch 1/2
+61839/61839 [==============================] - 494s 8ms/step - loss: 6.2289 - categorical\_accuracy: 0.0711 - val\_loss: 5.7886 - val\_categorical\_accuracy: 0.0688
+Epoch 2/2
+61839/61839 [==============================] - 542s 9ms/step - loss: 5.9084 - categorical\_accuracy: 0.0771 - val\_loss: 5.7305 - val\_categorical\_accuracy: 0.0956
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{save\PYZus{}dir} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./save/}\PY{l+s+s2}{\PYZdq{}}
+         
+         \PY{c+c1}{\PYZsh{} Load vocabulary}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loading vocabulary...}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{vocab\PYZus{}file} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{save\PYZus{}dir}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{words\PYZus{}vocab.pkl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{save\PYZus{}dir}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{words\PYZus{}vocab.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+                 \PY{n}{words}\PY{p}{,} \PY{n}{vocab}\PY{p}{,} \PY{n}{vocabulary\PYZus{}inv} \PY{o}{=} \PY{n}{cPickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+         
+         \PY{n}{vocab\PYZus{}size} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{words}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Load the model}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loading model...}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{model} \PY{o}{=} \PY{n}{load\PYZus{}model}\PY{p}{(}\PY{n}{save\PYZus{}dir} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{my\PYZus{}model\PYZus{}generate\PYZus{}sentences.h5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+loading vocabulary{\ldots}
+loading model{\ldots}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{def} \PY{n+nf}{sample}\PY{p}{(}\PY{n}{preds}\PY{p}{,} \PY{n}{temperature}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{)}\PY{p}{:}
+             \PY{n}{preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{preds}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{preds}\PY{p}{)} \PY{o}{/} \PY{n}{temperature}
+             \PY{n}{exp\PYZus{}preds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{preds}\PY{p}{)}
+             \PY{n}{preds} \PY{o}{=} \PY{n}{exp\PYZus{}preds} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{exp\PYZus{}preds}\PY{p}{)}
+             \PY{n}{probas} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{multinomial}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{preds}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{probas}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Iniatate sentence}
+         \PY{n}{seed\PYZus{}sentences} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{i will need}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{generated} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{sentence} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{n}{seq\PYZus{}length}\PY{p}{)}\PY{p}{:}
+             \PY{n}{sentence}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{seed} \PY{o}{=} \PY{n}{seed\PYZus{}sentences}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{seed}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{sentence}\PY{p}{[}\PY{n}{seq\PYZus{}length}\PY{o}{\PYZhy{}}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{=}\PY{n}{seed}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{seed}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+         
+         \PY{n}{generated} \PY{o}{+}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{sentence}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Generating text with the following seed: }\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{sentence}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n+nb}{print} \PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Generating text with the following seed: "a a a a a a a a a a a a i will need"
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{words\PYZus{}number} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{c+c1}{\PYZsh{} Generate the text}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{words\PYZus{}number}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}create the vector}
+             \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{seq\PYZus{}length}\PY{p}{,} \PY{n}{vocab\PYZus{}size}\PY{p}{)}\PY{p}{)}
+             \PY{k}{for} \PY{n}{t}\PY{p}{,} \PY{n}{word} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{sentence}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{t}\PY{p}{,} \PY{n}{vocab}\PY{p}{[}\PY{n}{word}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{1.}
+             \PY{c+c1}{\PYZsh{}print(x.shape)}
+         
+             \PY{c+c1}{\PYZsh{}calculate next word}
+             \PY{n}{preds} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{next\PYZus{}index} \PY{o}{=} \PY{n}{sample}\PY{p}{(}\PY{n}{preds}\PY{p}{,} \PY{l+m+mf}{0.2}\PY{p}{)}
+             \PY{n}{next\PYZus{}word} \PY{o}{=} \PY{n}{vocabulary\PYZus{}inv}\PY{p}{[}\PY{n}{next\PYZus{}index}\PY{p}{]}
+         
+             \PY{c+c1}{\PYZsh{}add the next word to the text}
+             \PY{n}{generated} \PY{o}{+}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n}{next\PYZus{}word}
+             \PY{c+c1}{\PYZsh{} shift the sentence by one, and and the next word at its end}
+             \PY{n}{sentence} \PY{o}{=} \PY{n}{sentence}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} \PY{o}{+} \PY{p}{[}\PY{n}{next\PYZus{}word}\PY{p}{]}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{generated}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+a a a a a a a a a a a a i will need .   .     .   ?    
+
+    \end{Verbatim}
+
+    As you can see, it can not create reasonable result with simple DNN
+model. Also, I have to clean the dataset with better methods to get
+better result. So that, I have tried to n-grams model. They works
+better.
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsection{N-GRAMS}\label{n-grams}
+
+\href{https://web.stanford.edu/~jurafsky/slp3/slides/LM_4.pdf}{Idea}
+
+\href{https://github.com/rikenshah/predict-next-word}{Some Code}
+
+I want to create the system which has low memory usage and need low CPU
+power. So that, I will try
+\href{https://docs.python.org/3/library/collections.html}{python
+containers} and compare them.
+
+Firstly, I will start with how we can use txt file to create bi-grams. I
+will use Cornell Movie Quote Dataset as my text generation system.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{k+kn}{import} \PY{n+nn}{re}
+         \PY{k+kn}{from} \PY{n+nn}{nltk} \PY{k}{import} \PY{n}{ngrams}
+         \PY{k+kn}{from} \PY{n+nn}{collections} \PY{k}{import} \PY{n}{Counter}
+         \PY{k+kn}{import} \PY{n+nn}{nltk}
+         
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}I just want to alpha\PYZhy{}numeric characters.\PYZdq{}\PYZdq{}\PYZdq{}}
+         
+         \PY{n}{pattern} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[\PYZca{}a\PYZhy{}zA\PYZhy{}Z}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{s]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{data\PYZus{}revise} \PY{o}{=} \PY{n}{pattern}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{data\PYZus{}revise} \PY{o}{=} \PY{n}{data\PYZus{}revise}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}
+         \PY{n}{text} \PY{o}{=} \PY{n}{data\PYZus{}revise}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}
+         \PY{n}{nonPunct} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.*[A\PYZhy{}Za\PYZhy{}z0\PYZhy{}9].*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} must contain a letter or digit}
+         \PY{n}{filtered} \PY{o}{=} \PY{p}{[}\PY{n}{w} \PY{k}{for} \PY{n}{w} \PY{o+ow}{in} \PY{n}{text} \PY{k}{if} \PY{n}{nonPunct}\PY{o}{.}\PY{n}{match}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{p}{]}
+         \PY{n}{unigramsCounter} \PY{o}{=} \PY{n}{Counter}\PY{p}{(}\PY{n}{filtered}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} counts}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{o}{\PYZpc{}} \PY{n}{time}
+         
+         \PY{n}{bigrams} \PY{o}{=} \PY{n}{ngrams}\PY{p}{(}\PY{n}{data\PYZus{}revise}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{n}{bigramsCounter} \PY{o}{=} \PY{n}{Counter}\PY{p}{(}\PY{n}{bigrams}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+CPU times: user 2 µs, sys: 1e+03 ns, total: 3 µs
+Wall time: 6.91 µs
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{o}{\PYZpc{}} \PY{n}{time}
+         
+         \PY{n}{tokens} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{word\PYZus{}tokenize}\PY{p}{(}\PY{n}{data\PYZus{}revise}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Create your bigrams}
+         \PY{n}{bgs} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{bigrams}\PY{p}{(}\PY{n}{tokens}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}compute frequency distribution for all the bigrams in the text}
+         \PY{n}{fdist} \PY{o}{=} \PY{n}{nltk}\PY{o}{.}\PY{n}{FreqDist}\PY{p}{(}\PY{n}{bgs}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+CPU times: user 2 µs, sys: 1e+03 ns, total: 3 µs
+Wall time: 6.91 µs
+
+    \end{Verbatim}
+
+    There is not much difference between these 2 methods in terms of memory
+usage and CPU. I will use Counter.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{o}{\PYZpc{}}\PY{k}{time}
+         \PY{k+kn}{import} \PY{n+nn}{pickle}
+         \PY{k+kn}{from} \PY{n+nn}{collections} \PY{k}{import} \PY{n}{OrderedDict}
+         
+         \PY{c+c1}{\PYZsh{} We need to save Counter as a pickle to use later.}
+         \PY{n}{pickleDumps} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickleDumps/}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{conditionalProbabilityFile} \PY{o}{=} \PY{n}{pickleDumps}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{conditionalProbabilityDictBigram.p}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{bigramsCounterPath} \PY{o}{=} \PY{n}{pickleDumps}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bigramsCounter.p}\PY{l+s+s2}{\PYZdq{}}
+         
+         
+         \PY{n}{conditionalProbabilityDict} \PY{o}{=} \PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Key: Bigram, Value: Prob. of bigram}
+         
+         \PY{k}{for} \PY{n}{words}\PY{p}{,} \PY{n}{count} \PY{o+ow}{in} \PY{n}{bigramsCounter}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{firstWord} \PY{o}{=} \PY{n}{words}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{secondWord} \PY{o}{=} \PY{n}{words}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{count} \PY{o}{=} \PY{n}{count}
+             \PY{n}{cProb} \PY{o}{=} \PY{n}{count} \PY{o}{*} \PY{l+m+mf}{1.0} \PY{o}{/} \PY{n}{unigramsCounter}\PY{p}{[}\PY{n}{firstWord}\PY{p}{]}
+             \PY{n}{conditionalProbabilityDict}\PY{p}{[}\PY{n}{firstWord}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n}{secondWord}\PY{p}{]} \PY{o}{=} \PY{n}{cProb}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+CPU times: user 4 µs, sys: 1e+03 ns, total: 5 µs
+Wall time: 10 µs
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{file} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{bigramsCounterPath}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{bigramsCounter}\PY{p}{,}\PY{n}{file}\PY{p}{)}
+         \PY{n}{file} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{conditionalProbabilityFile}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{conditionalProbabilityDict}\PY{p}{,}\PY{n}{file}\PY{p}{)}
+\end{Verbatim}
+
+
+    I can not enter input via Jupyter notebook. So we need to my python
+script. However, I will give some example from system.
+Enter a word to predict its next probable words (':)' for stopping) : i g
+i got : 0.016574585635359115
+
+i guess : 0.011740331491712707
+
+i get : 0.011740331491712707
+
+Enter a word to predict its next probable words (':)' for stopping) : you c
+you can : 0.0210688591983556
+
+you cant : 0.012846865364850977
+
+you could : 0.008735868448098663
+
+Enter a word to predict its next probable words (':)' for stopping) : for
+for the : 0.13903743315508021
+
+for a : 0.11497326203208556
+
+for you : 0.09358288770053476
+
+
+Enter a word to predict its next probable words (':)' for stopping) : for in
+for information : 0.00267379679144385
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+As you can see, results are not so satisfied. I want to improve it. So
+that, I will use directly
+\href{https://www.ngrams.info/samples_coca1.asp}{COCA Corpus} which
+contains the 1,000,000 most frequent 2, 3, 4, and 5-grams. I will use
+non-case sensitive corpus. \emph{(To download it, you need to register
+with your e-mail. So, I cannot share wget download script to this
+Corpus)}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./w2\PYZus{}.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{content} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+         \PY{n}{content} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{content}\PY{p}{]}     
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{o}{\PYZpc{}}\PY{k}{time}
+         
+         \PY{k+kn}{import} \PY{n+nn}{pickle}\PY{o}{,} \PY{n+nn}{os}
+         \PY{k+kn}{from} \PY{n+nn}{collections} \PY{k}{import} \PY{n}{OrderedDict}
+         
+         \PY{n}{corpusPath} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{fileName} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w2\PYZus{}.txt}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{pickleDumps} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickleDumps/}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{conditionalProbabilityFile} \PY{o}{=} \PY{n}{pickleDumps}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{conditionalProbabilityDictBigram.p}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{bigramsCounterPath} \PY{o}{=} \PY{n}{pickleDumps} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bigramsCounter.p}\PY{l+s+s2}{\PYZdq{}}
+         
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{corpusPath}\PY{o}{+}\PY{n}{fileName}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{lines} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{bigramsCounter} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} To store bigrams count. Key: single word, value: how many}
+         \PY{n}{unigramsCounter} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} To store unigrams count. Key: word pair, value: how many}
+         
+         \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{lines}\PY{p}{:}
+             
+             \PY{c+c1}{\PYZsh{} Removing \PYZbs{}n and \PYZbs{}r that were due to readline and splitting by tab}
+             \PY{n}{singleLine} \PY{o}{=} \PY{n}{line}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{bigramsCounter}\PY{p}{[}\PY{n}{singleLine}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{singleLine}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{singleLine}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} If key does not exist, we need to create key, value pair with inital values}
+             \PY{c+c1}{\PYZsh{} If key exists then add the count of that unigram}
+             \PY{k}{if} \PY{n}{singleLine}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o+ow}{in} \PY{n}{unigramsCounter}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{unigramsCounter}\PY{p}{[}\PY{n}{singleLine}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{singleLine}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{unigramsCounter}\PY{p}{[}\PY{n}{singleLine}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{singleLine}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+CPU times: user 3 µs, sys: 1e+03 ns, total: 4 µs
+Wall time: 6.91 µs
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{o}{\PYZpc{}}\PY{k}{time}
+         \PY{k+kn}{import} \PY{n+nn}{pickle}
+         
+         \PY{n}{conditionalProbabilityDict} \PY{o}{=} \PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} key:bigram , value:probability}
+         \PY{k}{for} \PY{n}{words}\PY{p}{,} \PY{n}{count} \PY{o+ow}{in} \PY{n}{bigramsCounter}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{firstWord} \PY{o}{=} \PY{n}{words}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{secondWord} \PY{o}{=} \PY{n}{words}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{count} \PY{o}{=} \PY{n}{count}
+             \PY{n}{cProb} \PY{o}{=} \PY{n}{count} \PY{o}{*} \PY{l+m+mf}{1.0} \PY{o}{/} \PY{n}{unigramsCounter}\PY{p}{[}\PY{n}{firstWord}\PY{p}{]}
+             \PY{n}{conditionalProbabilityDict}\PY{p}{[}\PY{n}{firstWord}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n}{secondWord}\PY{p}{]} \PY{o}{=} \PY{n}{cProb}
+         
+         \PY{c+c1}{\PYZsh{} print conditionalProbabilityDict}
+         \PY{n}{file} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{conditionalProbabilityFile}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{conditionalProbabilityDict}\PY{p}{,}\PY{n}{file}\PY{p}{)}
+         
+         \PY{n}{file} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{bigramsCounterPath}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{bigramsCounter}\PY{p}{,}\PY{n}{file}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+CPU times: user 3 µs, sys: 1e+03 ns, total: 4 µs
+Wall time: 6.91 µs
+
+    \end{Verbatim}
+
+    \textbf{Memory Usage for Pickle Files}
+
+If we use orderedDict to store bigrams, pickleDumps folder takes 83.8 MB
+memory.
+
+If use Counter to store bigrams, pickleDumps folder takes 71.3 MB
+memory.
+
+\textbf{Speed}
+
+I have tried both store method with different prediction string, there
+is no sufficient difference between them. However, I need to test with
+at least 10000 different scripts to understand difference.
+
+Mostly, it can give the result in 100ms-150ms.
+
+    \textbf{Examples}
+Enter a word to predict its next probable words (':)' for stopping) : for
+for the : 0.18615500817070693
+
+for a : 0.09376909228897273
+
+for example : 0.025409373405987343
+
+Enter a word to predict its next probable words (':)' for stopping) : for in
+for instance : 0.008036617330354772
+
+for information : 0.0013408959057072335
+
+for in : 0.0010947629860785409
+
+Enter a word to predict its next probable words (':)' for stopping) : can we g
+we got : 0.012135281736282812
+
+we get : 0.010222156277533184
+
+we go : 0.008274891311626734
+    To improve result, I want to implement trigrams. However, because of
+limited time, I can not create combination of both method.
+
+    \textbf{3-GRAM}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{o}{\PYZpc{}}\PY{k}{time}
+         
+         \PY{k+kn}{import} \PY{n+nn}{pickle}\PY{o}{,} \PY{n+nn}{os}
+         \PY{k+kn}{from} \PY{n+nn}{collections} \PY{k}{import} \PY{n}{OrderedDict}
+         
+         \PY{n}{corpusPath} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{fileName} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{w3\PYZus{}.txt}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{pickleDumps} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pickleDumps/}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{conditionalProbabilityFile} \PY{o}{=} \PY{n}{pickleDumps}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{conditionalProbabilityDictTrigram.p}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{trigramsCounterPath} \PY{o}{=} \PY{n}{pickleDumps} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{trigramsCounter.p}\PY{l+s+s2}{\PYZdq{}}
+         
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{corpusPath}\PY{o}{+}\PY{n}{fileName}\PY{p}{,} \PY{n}{encoding} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ISO\PYZhy{}8859\PYZhy{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{lines} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{trigramsCounter} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} To store bigrams count. Key: single word, value: how many}
+         \PY{n}{unigramsCounter} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}} \PY{c+c1}{\PYZsh{} To store unigrams count. Key: word pair, value: how many}
+         
+         \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{lines}\PY{p}{:}
+             
+             \PY{c+c1}{\PYZsh{} Removing \PYZbs{}n and \PYZbs{}r that were due to readline and splitting by tab}
+             \PY{n}{singleLine} \PY{o}{=} \PY{n}{line}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{trigramsCounter}\PY{p}{[}\PY{n}{singleLine}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{singleLine}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{singleLine}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{singleLine}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} If key does not exist, we need to create key, value pair with inital values}
+             \PY{c+c1}{\PYZsh{} If key exists then add the count of that unigram}
+             \PY{k}{if} \PY{n}{singleLine}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o+ow}{in} \PY{n}{unigramsCounter}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{unigramsCounter}\PY{p}{[}\PY{n}{singleLine}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{singleLine}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{unigramsCounter}\PY{p}{[}\PY{n}{singleLine}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{singleLine}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+CPU times: user 3 µs, sys: 0 ns, total: 3 µs
+Wall time: 6.91 µs
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{o}{\PYZpc{}}\PY{k}{time}
+         \PY{k+kn}{import} \PY{n+nn}{pickle}
+         
+         \PY{n}{conditionalProbabilityDict} \PY{o}{=} \PY{n}{OrderedDict}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} key:bigram , value:probability}
+         \PY{k}{for} \PY{n}{words}\PY{p}{,} \PY{n}{count} \PY{o+ow}{in} \PY{n}{trigramsCounter}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{firstWord} \PY{o}{=} \PY{n}{words}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{secondWord} \PY{o}{=} \PY{n}{words}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{thirdWord} \PY{o}{=} \PY{n}{words}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+             \PY{n}{count} \PY{o}{=} \PY{n}{count}
+             \PY{n}{cProb} \PY{o}{=} \PY{n}{count} \PY{o}{*} \PY{l+m+mf}{1.0} \PY{o}{/} \PY{n}{unigramsCounter}\PY{p}{[}\PY{n}{firstWord}\PY{p}{]}
+             \PY{n}{conditionalProbabilityDict}\PY{p}{[}\PY{n}{firstWord}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n}{secondWord} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+}\PY{n}{thirdWord}\PY{p}{]} \PY{o}{=} \PY{n}{cProb}
+         
+         \PY{c+c1}{\PYZsh{} print conditionalProbabilityDict}
+         \PY{n}{file} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{conditionalProbabilityFile}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{conditionalProbabilityDict}\PY{p}{,}\PY{n}{file}\PY{p}{)}
+         
+         \PY{n}{file} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{n}{trigramsCounterPath}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{trigramsCounter}\PY{p}{,}\PY{n}{file}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+CPU times: user 3 µs, sys: 1e+03 ns, total: 4 µs
+Wall time: 6.91 µs
+
+    \end{Verbatim}
+
+    \textbf{Examples}
+Enter a word to predict its next probable words (':)' for stopping) : can i t
+
+Bigrams prediction:
+
+i think : 0.08613532912264124
+
+i thought : 0.014199842979509856
+
+i told : 0.006020473347966184
+
+____________________
+
+Trigrams prediction:
+
+can i tell : 0.0009584862682746684
+
+can i take : 0.00035332434987379933
+
+can i talk : 0.00034392742567502805-
+
+--------------
+
+Enter a word to predict its next probable words (':)' for stopping) : should we go to
+
+Bigrams prediction:
+
+to the : 0.10137702785084556
+
+to be : 0.06316283346651083
+
+to a : 0.02362025832529113
+
+____________________
+
+Trigrams prediction:
+
+go to the : 0.08628557038529337
+
+go to a : 0.023319063208259883
+
+go to school : 0.010480987156887434
+    \textbf{Speed}
+
+Mostly, it can give the result in 1500 ms. So, it is somewhat slow
+procedure. However, we can use different methods to store and call the
+words. But, I do not know so much things about data structures.
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\textbf{With More Time}
+
+\begin{itemize}
+\item
+  Implement the SQLITE type storage to get results faster.
+  http://zetcode.com/db/sqlitepythontutorial/
+\item
+  Calculate the perplexity for test set.
+\item
+  Implement the linear interpolation to guess next word.
+\item
+  Try to implement with low-level language.
+\end{itemize}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
